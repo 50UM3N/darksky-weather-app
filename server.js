@@ -21,7 +21,32 @@ app.post('/', (req, res) => {
     }
     res.json(a);
 });
-app.post('/weather', (req, res) => {
+app.post('/current', (req, res) => {
+    fetch('http://ifconfig.co/json')
+        .then(res => {
+            return res.json();
+        })
+        .then(data => {
+            getweather({ body: { lat: data.latitude, lng: data.longitude } }, res);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+});
+app.post('/search', (req, res) => {
+    let flag = true;
+    for (let i = 0; i < d.cities.length; i++) {
+        if (req.body.data.toLocaleLowerCase() == d.cities[i].name.toLocaleLowerCase()) {
+            getweather({ body: { lat: d.cities[i].lat, lng: d.cities[i].lng } }, res)
+            flag = false;
+            break;
+        }
+    }
+    if (flag) res.json(null);
+})
+app.post('/weather', (req, res) => {getweather(req, res);});
+
+function getweather(req, res) {
     const url = `https://api.darksky.net/forecast/${DARKSKY_API}/${req.body.lat},${req.body.lng}`;
     fetch(url)
         .then(response => {
@@ -32,5 +57,5 @@ app.post('/weather', (req, res) => {
         })
         .then(data => {
             res.json(data);
-        })
-});
+        });
+}

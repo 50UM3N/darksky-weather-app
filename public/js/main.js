@@ -1,5 +1,12 @@
-var imp = document.getElementById('inp');
+const icon = new Skycons({ color: '#222' });
+const imp = document.getElementById('inp');
 var current = -1;
+class dsicon {
+    set(element, name) {
+        element.setAttribute("style", `background: url('logo/${name}.svg');background-repeat: no-repeat;`);
+    }
+}
+const myicon = new dsicon();
 imp.addEventListener('input', function (e) {
     current = -1;
     deleteall();
@@ -8,7 +15,7 @@ imp.addEventListener('input', function (e) {
     a = document.createElement('div');
     a.setAttribute('id', 'aslist');
     a.setAttribute('class', 'aslist');
-    imp.parentNode.appendChild(a);
+    document.querySelector('.asbox').appendChild(a);
     fetch('/', {
         method: 'POST',
         headers: {
@@ -99,13 +106,67 @@ function addweather(data) {
         })
 }
 function setdata(data) {
-    document.getElementById('temp').innerHTML = "Tempreature: " + data.currently.temperature;
-    document.getElementById('atemp').innerHTML = "Apparent Tempreature: " + data.currently.apparentTemperature;
-    document.getElementById('dp').innerHTML = "Dew Point: " + data.currently.dewPoint;
-    document.getElementById('hd').innerHTML = "Humidity: " + data.currently.humidity;
-    document.getElementById('pre').innerHTML = "Pressure: " + data.currently.pressure;
-    document.getElementById('wp').innerHTML = "Wind Speed: " + data.currently.windSpeed;
-    document.getElementById('ui').innerHTML = "UV Index: " + data.currently.uvIndex;
-    document.getElementById('oz').innerHTML = "Ozone: " + data.currently.ozone;
+    function round(x, y) {
+        return ((Math.round(x * (10 ** y))) / (10 ** y));
+    }
+    const date = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+    document.getElementById('about').innerHTML = data.currently.summary;
+    myicon.set(document.querySelector('.img'), data.currently.icon);
+    //document.getElementById('location').innerHTML = document.getElementById('inp').value;
+    document.getElementById('location').innerHTML = data.timezone;
+    document.getElementById('temperature').innerHTML = data.currently.temperature + "˚";
+    document.getElementById('humidity').innerHTML = data.currently.humidity + "%";
+    document.getElementById('wind').innerHTML = data.currently.windSpeed + "mph";
+    document.getElementById('uvindex').innerHTML = data.currently.uvIndex;
 
+    for (let i = 0, j = new Date().getDay() + 1; i < 5; i++) {
+        let arr = [];
+        let d = '';
+        document.querySelectorAll('#day')[i].innerHTML = date[j];
+        icon.set(document.querySelectorAll('#skyconicon')[i], data.daily.data[i].icon);
+        document.querySelectorAll('#dailytemp')[i].innerHTML = round((data.daily.data[i].temperatureHigh + data.daily.data[i].temperatureLow) / 2, 1) + "˚";
+        arr = data.daily.data[i].icon.split('-');
+        for (let k = 0; k < arr.length; k++) { if (arr[k] != 'partly') d = d + " " + arr[k];}
+        document.querySelectorAll('#status')[i].innerHTML = d.slice(1);
+        j = (j + 1) % 7;
+    }
+    icon.play();
 }
+
+function onsear(a) {
+    fetch('/search', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({ data: a })
+    })
+        .then(res => {
+            return Promise.resolve(res.json());
+        })
+        .then(data => {
+            if (data != null) {setdata(data);} 
+            else window.alert('Location Not Found :(');
+        })
+        .catch(e => {console.log(e);});
+}
+function onlocation() {
+    fetch('/current', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    })
+        .then(res => {
+            return Promise.resolve(res.json());
+        })
+        .then(data => {
+            if (data != null) {setdata(data);} 
+            else window.alert('Location Not Found :(');
+        })
+        .catch(e => {console.log(e);});
+}
+for (let i = 0; i < 5; i++) { icon.set(document.querySelectorAll('#skyconicon')[i], "clear_day"); }
+onlocation();
