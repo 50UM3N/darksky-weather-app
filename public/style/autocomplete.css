@@ -1,12 +1,12 @@
 .aslist {
-    position: relative;
-    top: 20px;
+    position: absolute;
     width: 100%;
     border-radius: 6px;
     box-shadow: 0px 0px 10px lightgray;
     cursor: default;
     z-index: 33;
     background-color: white;
+    margin: 20px auto 0px auto;
 }
 
 .aslist div {

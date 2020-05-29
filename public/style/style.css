@@ -202,12 +202,14 @@ input {
     align-items: center;
     height: 100%;
     flex: 1 1 292px;
+    z-index: 100;
 }
 
 .img {
     position: absolute;
     width: 254px;
     height: 200px;
+    z-index: 100;
 }
 
 .lowersec {
