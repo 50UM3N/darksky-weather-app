@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/autocomplete.css">
     <script src="js/autocomplete.js"></script>
@@ -17,14 +17,31 @@
 
     <div class="asbox">
         <div class="inputsec">
-            <div class="inputbox"> <input name="aa" type="text" class="asinput" id="inp" placeholder="Search"></div>
-            <div class="searchicn"><button class="btn" onclick="onsear(document.getElementById('inp').value)"><i
-                        class="search-icon">search</i></button><button class="btn" onclick="onlocation()"><i
-                        class="search-icon">location_searching</i></button></div>
+            <div class="inputbox">
+                <input name="search" type="text" id="inp" placeholder="Search">
+            </div>
+            <div class="searchicn">
+                <button onclick="onsear(document.getElementById('inp').value)">
+                    <i class="search-icon">search</i>
+                </button>
+                <button onclick="onlocation()">
+                    <i class="search-icon">location_searching</i>
+                </button>
+            </div>
         </div>
     </div>
 
     <div class="weathercontainer" onresize="resize(this.style.width)">
+        <div class="topsection">
+            <div class="buttons">
+                <div class="celcius"><button>C</button></div>
+                <div class="fernhite"><button>F</button></div>
+            </div>
+            <div class="location">
+                <p id="location">Loaction</p>
+                <div class="hbox"></div>
+            </div>
+        </div>
         <div class="uppersec">
             <div class="weathercurrentsec">
                 <div class="temp-type">
@@ -49,12 +66,7 @@
                 </div>
             </div>
             <div class="iconsec">
-                
-                <div class="weathericon"> <div class="img"> </div></div>
-                <div class="location">
-                    <p id="location">Loaction</p>
-                    <div class="hbox"></div>
-                </div>
+                <div class="img"></div>
             </div>
         </div>
         <div class="lowersec">
@@ -84,7 +96,7 @@
                 </div>
                 <div class="box"></div>
             </div>
-            <div class="weatherhoursec">
+            <div class="dailyweathersec">
                 <div class="dailybox">
                     <p id="day">MON</p>
                     <canvas class="icon" id="skyconicon" width="40" height="40"></canvas>
@@ -124,24 +136,24 @@
         window.onload = e => {
             if (this.innerWidth < 664) {
                 document.querySelector('.infosec').style.display = "none";
-                document.querySelector('.weatherhoursec').style.height = "230px";
+                document.querySelector('.dailyweathersec').style.height = "230px";
             }
             else {
                 document.querySelector('.infosec').style.display = "block";
                 document.querySelector('.infosec').style.display = "flex";
-                document.querySelector('.weatherhoursec').style.height = "270px";
+                document.querySelector('.dailyweathersec').style.height = "270px";
             }
 
         }
         window.addEventListener("resize", () => {
             if (this.innerWidth < 664) {
                 document.querySelector('.infosec').style.display = "none";
-                document.querySelector('.weatherhoursec').style.height = "230px";
+                document.querySelector('.dailyweathersec').style.height = "230px";
             }
             else {
                 document.querySelector('.infosec').style.display = "block";
                 document.querySelector('.infosec').style.display = "flex";
-                document.querySelector('.weatherhoursec').style.height = "270px";
+                document.querySelector('.dailyweathersec').style.height = "270px";
             }
         });
     </script>

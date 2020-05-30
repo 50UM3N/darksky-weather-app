@@ -1,6 +1,7 @@
 const icon = new Skycons({ color: '#222' });
 const myicon = new dsimage();
 const as = new autocomplete(document.getElementById('inp'), document.querySelector('.asbox'));
+var flag=false;
 as.listener(addweather);
 
 // get the weather data from server

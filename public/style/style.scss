@@ -1,0 +1,311 @@
+@mixin box($color) {
+    border-radius: 1.5px;
+    height: 70%;
+    width: 3px;
+    background: $color;
+}
+@font-face {
+    font-family: "Material Icons";
+    font-style: normal;
+    font-weight: 400;
+    src: url(https://fonts.gstatic.com/s/materialicons/v50/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2) format("woff2");
+}
+
+* {
+    font-family: "Balsamiq Sans";
+    /* font-family: 'Segoe UI', sans-serif;*/
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.asbox {
+    position: absolute;
+    left: 50%;
+    top: 18px;
+    transform: translate(-50%, 0%);
+    width: 95%;
+    max-width: 900px;
+    min-width: 300px;
+    height: 40px;
+    z-index: 33;
+    .inputsec {
+        box-shadow: 0px 0px 10px lightgray;
+        border-radius: 12px;
+        display: flex;
+        .inputbox {
+            flex: 1 1 200px;
+            input {
+                background: none;
+                width: 100%;
+                border: none;
+                outline: none;
+                flex: 1 1 250px;
+                height: 40px;
+                padding-left: 20px;
+                font-size: 20px;
+                padding-right: 45px;
+            }
+        }
+        .search-icon {
+            pointer-events: none;
+            -moz-osx-font-smoothing: grayscale;
+            font-family: "Material Icons";
+            font-weight: normal;
+            font-style: normal;
+            font-size: 25px;
+            z-index: 3;
+        }
+        button {
+            padding-top: 2px;
+            height: 40px;
+            width: 40px;
+            background: none;
+            outline: none;
+            border: none;
+            color: gray;
+            transition: 0.2s linear;
+            &:hover {
+                color: black;
+            }
+            &:active {
+                color: black;
+            }
+        }
+    }
+}
+
+.weathercontainer {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    border-radius: 30px;
+    width: 95%;
+    height: auto;
+    max-width: 900px;
+    min-width: 300px;
+    left: 50%;
+    top: 80px;
+    transform: translate(-50%, 0%);
+    border-radius: 12px;
+    box-shadow: 0px 0px 10px lightgray;
+    margin-bottom: 15px;
+    .topsection {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 50px;
+        padding: 0px 15px 0px 15px;
+        background-color: #f3f9fe;
+        color: #46494c;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        .buttons {
+            display: flex;
+            align-items: center;
+            button {
+                background: none;
+                border: none;
+                outline: none;
+                font-size: 20px;
+                font-weight: bold;
+                margin-left: 10px;
+                transition: 0.2s;
+                &:hover {
+                    color: dodgerblue;
+                }
+                &:active {
+                    color: #1e9b42;
+                }
+            }
+        }
+        .location {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 80px;
+            height: 100%;
+            font-weight: bold;
+            text-align: center;
+            flex: 1 1 80px;
+            p {
+                margin-top: 12px;
+                font-size: 15px;
+            }
+            .hbox {
+                left: 15px;
+                height: 4px;
+                width: 50px;
+                border-radius: 2px;
+                background-color: #5465ff;
+                margin-top: 3px;
+            }
+        }
+    }
+    .uppersec {
+        display: flex;
+        position: relative;
+        flex-wrap: wrap;
+        height: auto;
+        width: 100%;
+        background-color: #f3f9fe;
+        color: #46494c;
+        padding-left: 15px;
+        padding-right: 15px;
+        .weathercurrentsec {
+            position: relative;
+            height: 230px;
+            flex: 1 1 347px;
+            /* flex-grow, flex-shrink, flex basis*/
+            .temp-type {
+                position: absolute;
+                width: 100%;
+                height: 150px;
+                text-align: center;
+                p:nth-child(1) {
+                    font-size: 100px;
+                }
+                p:nth-child(2) {
+                    line-height: 10px;
+                    font-size: 30px;
+                }
+            }
+            .hw {
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                top: 150px;
+                position: absolute;
+                width: 100%;
+                height: 80px;
+                font-size: 16px;
+                .proparty {
+                    padding-top: 10px;
+                    height: 100%;
+                    flex-basis: 80px;
+                    text-align: center;
+                }
+                p:nth-child(1) {
+                    margin-bottom: 12px;
+                }
+                .box {
+                    @include box(#5465ff);
+                }
+            }
+        }
+        .iconsec {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 230px;
+            flex: 1 1 300px;
+            .img {
+                width: 254px;
+                height: 200px;
+                z-index: 100;
+            }
+        }
+    }
+    .lowersec {
+        display: flex;
+        flex-grow: 1;
+        position: relative;
+        height: auto;
+        width: 100%;
+        transition: 0.3s;
+        padding-left: 15px;
+        padding-right: 15px;
+        .infosec {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            height: 270px;
+            flex: 1 1 180px;
+            /* flex-grow, flex-shrink, flex basis*/
+            .items {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+                height: 270px;
+                .plate {
+                    display: flex;
+                    align-items: center;
+                    padding-left: 10px;
+                    width: 150px;
+                    height: 50px;
+                    border-radius: 10px;
+                    .icon {
+                        display: inline-block;
+                        width: 30px;
+                    }
+                    .github {
+                        fill: #24292e;
+                    }
+
+                    .gitlab {
+                        fill: #e24329;
+                    }
+
+                    .facebook {
+                        fill: #1773ea;
+                    }
+                    .link {
+                        margin-left: 20px;
+                        line-height: 50px;
+                        height: 100%;
+                        color: black;
+                        a {
+                            text-decoration: none;
+                            color: #24292e;
+                            font-weight: bold;
+                            font-size: 16px;
+                        }
+                    }
+                    &:nth-child(1) a:hover {
+                        color: #1e9b42;
+                    }
+
+                    &:nth-child(2) a:hover {
+                        color: #e24329;
+                    }
+
+                    &:nth-child(3) a:hover {
+                        color: #1773ea;
+                    }
+                }
+            }
+            .box {
+                @include box(#5465ff);
+            }
+        }
+        .dailyweathersec {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            height: 270px;
+            flex: 1 1 600px;
+            transition: 0.3s;
+            text-align: center;
+            .dailybox {
+                flex: 1 1 auto;
+                color: #434548;
+                .icon {
+                    margin-top: 15px;
+                    margin-bottom: 10px;
+                }
+                p:nth-child(1) {
+                    font-size: 22px;
+                    font-weight: bold;
+                }
+                p:nth-child(3) {
+                    font-size: 20px;
+                }
+                p:nth-child(4) {
+                    font-size: 13px;
+                    color: #64676d;
+                    font-weight: bold;
+                }
+            }
+        }
+    }
+}
