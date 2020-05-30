@@ -1,9 +1,40 @@
 const icon = new Skycons({ color: '#222' });
 const myicon = new dsimage();
 const as = new autocomplete(document.getElementById('inp'), document.querySelector('.asbox'));
-var flag=false;
+var flag = false;
 as.listener(addweather);
-
+function CtoF(c) { return ((c * (9 / 5)) + 32); }
+function FtoC(f) { return ((f - 32) * (5 / 9)); }
+function round(x, y) { return ((Math.round(x * (10 ** y))) / (10 ** y)); }
+function cel(e) {
+    if (!flag) {
+        flag=true;
+        document.querySelector('.cel').setAttribute('class', 'btn cel active');
+        document.querySelector('.far').setAttribute('class', 'btn far');
+        let b = document.getElementById('temperature');
+        console.log()
+        b.innerHTML = round(FtoC(Number(b.innerHTML.slice(0, -1))), 2) + "˚";
+        for (let i = 0; i < 5; i++) {
+            let a = document.querySelectorAll('#dailytemp')[i];
+            a.innerHTML = round(FtoC(Number(a.innerHTML.slice(0, -1))), 1) + "˚";
+        }
+    }
+}
+//when user click 
+function fer() {
+    if (flag) {
+        flag=false;
+        document.querySelector('.cel').setAttribute('class', 'btn cel');
+        document.querySelector('.far').setAttribute('class', 'btn far active');
+        let b = document.getElementById('temperature');
+        console.log()
+        b.innerHTML = round(CtoF(Number(b.innerHTML.slice(0, -1))), 2) + "˚";
+        for (let i = 0; i < 5; i++) {
+            let a = document.querySelectorAll('#dailytemp')[i];
+            a.innerHTML = round(CtoF(Number(a.innerHTML.slice(0, -1))), 1) + "˚";
+        }
+    }
+}
 // get the weather data from server
 function addweather(data) {
     fetch('/weather', {
@@ -30,7 +61,6 @@ function addweather(data) {
 
 // set ehr weather data to the client page
 function setdata(data) {
-    function round(x, y) {return ((Math.round(x * (10 ** y))) / (10 ** y));}
     const date = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     document.getElementById('about').innerHTML = data.currently.summary;
     myicon.set(document.querySelector('.img'), data.currently.icon);
@@ -39,7 +69,8 @@ function setdata(data) {
     document.getElementById('humidity').innerHTML = data.currently.humidity + "%";
     document.getElementById('wind').innerHTML = data.currently.windSpeed + "mph";
     document.getElementById('uvindex').innerHTML = data.currently.uvIndex;
-    for (let i = 0, j = new Date().getDay() + 1; i < 5; i++) {
+    for (let i = 0, j = new Date().getDay(); i < 5; i++) {
+        j = (j + 1) % 7;
         let arr = [];
         let d = '';
         document.querySelectorAll('#day')[i].innerHTML = date[j];
@@ -48,7 +79,7 @@ function setdata(data) {
         arr = data.daily.data[i].icon.split('-');
         for (let k = 0; k < arr.length; k++) { if (arr[k] != 'partly') d = d + " " + arr[k]; }
         document.querySelectorAll('#status')[i].innerHTML = d.slice(1);
-        j = (j + 1) % 7;
+        
     }
     icon.play();
 }

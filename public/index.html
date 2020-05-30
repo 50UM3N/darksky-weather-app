@@ -34,8 +34,8 @@
     <div class="weathercontainer" onresize="resize(this.style.width)">
         <div class="topsection">
             <div class="buttons">
-                <div class="celcius"><button>C</button></div>
-                <div class="fernhite"><button>F</button></div>
+                <div id="celsius"><button class="btn cel" onclick="cel(this)">C</button></div>
+                <div id="fahrenheit"><button class="btn far active" onclick="fer(this)">F</button></div>
             </div>
             <div class="location">
                     <p id="location">Loaction</p>
@@ -100,7 +100,7 @@
                 <div class="dailybox">
                     <p id="day">MON</p>
                     <canvas class="icon" id="skyconicon" width="40" height="40"></canvas>
-                    <p id="dailytemp">00</p>
+                    <p id="dailytemp">00.0˚</p>
                     <p id="status">status</p>
                 </div>
                 <div class="dailybox">

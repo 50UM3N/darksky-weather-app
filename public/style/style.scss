@@ -98,26 +98,30 @@
         height: 50px;
         padding: 0px 15px 0px 15px;
         background-color: #f3f9fe;
-        color: #46494c;
         border-top-left-radius: 12px;
         border-top-right-radius: 12px;
         .buttons {
             display: flex;
             align-items: center;
-            button {
+            .btn {
                 background: none;
                 border: none;
+                color: #46494c;
                 outline: none;
                 font-size: 20px;
                 font-weight: bold;
                 margin-left: 10px;
                 transition: 0.2s;
+                cursor: pointer;
                 &:hover {
                     color: dodgerblue;
                 }
                 &:active {
                     color: #1e9b42;
                 }
+            }
+            .active{
+                color: #1e9b42;
             }
         }
         .location {

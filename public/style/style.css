@@ -124,7 +124,6 @@
   height: 50px;
   padding: 0px 15px 0px 15px;
   background-color: #f3f9fe;
-  color: #46494c;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
 }
@@ -138,22 +137,28 @@
           align-items: center;
 }
 
-.weathercontainer .topsection .buttons button {
+.weathercontainer .topsection .buttons .btn {
   background: none;
   border: none;
+  color: #46494c;
   outline: none;
   font-size: 20px;
   font-weight: bold;
   margin-left: 10px;
   -webkit-transition: 0.2s;
   transition: 0.2s;
+  cursor: pointer;
 }
 
-.weathercontainer .topsection .buttons button:hover {
+.weathercontainer .topsection .buttons .btn:hover {
   color: dodgerblue;
 }
 
-.weathercontainer .topsection .buttons button:active {
+.weathercontainer .topsection .buttons .btn:active {
+  color: #1e9b42;
+}
+
+.weathercontainer .topsection .buttons .active {
   color: #1e9b42;
 }
 
