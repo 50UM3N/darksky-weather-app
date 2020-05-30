@@ -93,6 +93,7 @@
     .topsection {
         display: flex;
         align-items: center;
+        justify-content: space-between;
         width: 100%;
         height: 50px;
         padding: 0px 15px 0px 15px;
@@ -123,11 +124,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 80px;
             height: 100%;
             font-weight: bold;
+            width: auto;
             text-align: center;
-            flex: 1 1 80px;
             p {
                 margin-top: 12px;
                 font-size: 15px;
